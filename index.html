@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leonora Thomsen — Content & Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #FAF7F2;
+      --linen:   #F2EAE0;
+      --sand:    #E4D5C3;
+      --tan:     #C9A98A;
+      --warm:    #A07850;
+      --brown:   #6B4C32;
+      --deep:    #3E2A18;
+      --text:    #4A3728;
+      --muted:   #9B836E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Cursor ──────────────────────────────────── */
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--brown);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--tan);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.35s cubic-bezier(.25,.46,.45,.94), width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* ── Navigation ──────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      background: transparent;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 18px 60px;
+      border-bottom: 1px solid var(--sand);
+    }
+    .nav-name {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--brown);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      opacity: 0;
+      animation: fadeDown 0.8s ease 0.2s forwards;
+    }
+    .nav-links {
+      display: flex; gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      opacity: 0;
+      animation: fadeDown 0.8s ease forwards;
+    }
+    .nav-links li:nth-child(1) a { animation-delay: 0.3s; }
+    .nav-links li:nth-child(2) a { animation-delay: 0.4s; }
+    .nav-links li:nth-child(3) a { animation-delay: 0.5s; }
+    .nav-links a:hover { color: var(--brown); }
+
+    /* ── Hero ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 120px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.4s forwards;
+    }
+    .hero-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(72px, 11vw, 160px);
+      font-weight: 600;
+      line-height: 0.95;
+      color: var(--deep);
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3vw, 30px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--warm);
+      margin-top: 16px;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.8s forwards;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 48px; left: 60px;
+      display: flex; align-items: center; gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+    .hero-scroll-line {
+      width: 40px; height: 1px;
+      background: var(--tan);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--brown);
+      animation: slideLine 2s ease-in-out 1.5s infinite;
+    }
+    .hero-deco {
+      position: absolute;
+      right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--sand) 0%, transparent 70%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .hero-deco-2 {
+      position: absolute;
+      right: 120px; bottom: 60px;
+      font-family: 'Caveat', cursive;
+      font-size: 200px;
+      font-weight: 700;
+      color: var(--linen);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      opacity: 0;
+      animation: fadeIn 1.5s ease 1s forwards;
+    }
+
+    /* ── Sections shared ─────────────────────────── */
+    section { padding: 100px 60px; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .section-heading {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      color: var(--deep);
+      line-height: 1;
+      margin-bottom: 60px;
+    }
+
+    /* ── About ───────────────────────────────────── */
+    #about {
+      background: var(--linen);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -16px -16px 16px 16px;
+      border: 1px solid var(--sand);
+      border-radius: 2px;
+      transition: inset 0.4s ease;
+    }
+    .about-image-wrap:hover::before {
+      inset: -8px -8px 8px 8px;
+    }
+    .about-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: sepia(8%) saturate(90%);
+      transition: filter 0.4s ease;
+    }
+    .about-img:hover { filter: sepia(0%) saturate(100%); }
+
+    .about-content {}
+    .about-text {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .about-text + .about-text { margin-bottom: 40px; }
+
+    .skills-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .skills-list {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .skill-tag {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      padding: 8px 18px;
+      border: 1px solid var(--sand);
+      border-radius: 40px;
+      color: var(--warm);
+      background: var(--cream);
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: var(--cream);
+    }
+
+    /* ── Work ────────────────────────────────────── */
+    #work { background: var(--cream); }
+
+    .work-tabs {
+      display: flex; gap: 0;
+      margin-bottom: 60px;
+      border-bottom: 1px solid var(--sand);
+    }
+    .work-tab {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 14px 28px;
+      cursor: pointer;
+      border: none; background: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .work-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 2px;
+      background: var(--brown);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .work-tab.active { color: var(--brown); }
+    .work-tab.active::after { transform: scaleX(1); }
+    .work-tab:hover { color: var(--brown); }
+
+    .work-panel { display: none; }
+    .work-panel.active { display: block; }
+
+    #panel-graphic .content-card { aspect-ratio: 1/1; }
+    #panel-graphic .content-card-bg {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: var(--linen);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* ── Real content cards ── */
+    .content-card {
+      aspect-ratio: 9/16;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.4s cubic-bezier(.25,.46,.45,.94), box-shadow 0.4s ease;
+    }
+    .content-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(62,42,24,0.18); }
+
+    .content-card-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center top;
+      transition: transform 0.6s ease;
+    }
+    .content-card:hover .content-card-bg { transform: scale(1.04); }
+
+    /* gradient overlay — always visible at bottom */
+    .content-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30,18,10,0.88) 0%,
+        rgba(30,18,10,0.3) 50%,
+        transparent 75%
+      );
+      z-index: 1;
+    }
+
+    .content-card-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 24px 22px;
+      z-index: 2;
+    }
+    .content-card-platform {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .platform-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--tan);
+      display: inline-block;
+    }
+    .content-card-title {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .content-card-tags {
+      display: flex; flex-wrap: wrap; gap: 5px;
+    }
+    .content-tag {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid rgba(201,169,138,0.45);
+      border-radius: 20px;
+      color: var(--sand);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+    }
+    /* Watch button — appears on hover */
+    .content-card-watch {
+      position: absolute;
+      top: 18px; right: 18px;
+      z-index: 2;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 7px 14px;
+      border-radius: 20px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .content-card:hover .content-card-watch { opacity: 1; transform: translateY(0); }
+
+    /* gradient-only background cards */
+    .bg-grad-1 { background: linear-gradient(160deg, #8B6E52 0%, #3E2A18 100%); }
+    .bg-grad-2 { background: linear-gradient(160deg, #C9A98A 0%, #5C3D2E 100%); }
+    .bg-grad-3 { background: linear-gradient(160deg, #A07850 0%, #3E2A18 100%); }
+
+    /* ── Campaign bricks ─────────────────────────── */
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .camp-sluk    { grid-column: 1; grid-row: 1; }
+    .camp-detokay { grid-column: 2 / 4; grid-row: 1; }
+    .camp-afh     { grid-column: 1; grid-row: 2; }
+    .camp-nomi    { grid-column: 2; grid-row: 2; }
+    .camp-dele    { grid-column: 3; grid-row: 2; }
+
+    /* The brick: visual on top, info panel below */
+    .camp-brick {
+      display: flex;
+      flex-direction: column;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--sand);
+      transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(.25,.46,.45,.94);
+    }
+    .camp-brick:hover {
+      box-shadow: 0 20px 48px rgba(62,42,24,0.13);
+      transform: translateY(-5px);
+    }
+
+    /* Visual area (clickable) */
+    .camp-visual {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .camp-sluk    .camp-visual { aspect-ratio: 9/16; }
+    .camp-detokay .camp-visual { aspect-ratio: 9/8;  }
+    .camp-afh     .camp-visual,
+    .camp-nomi    .camp-visual,
+    .camp-dele    .camp-visual { aspect-ratio: 4/3;  }
+
+    .camp-visual-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+    .camp-visual:hover .camp-visual-bg { transform: scale(1.04); }
+    .camp-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(30,18,10,0.55) 0%, transparent 55%);
+    }
+    .camp-watch-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      z-index: 2;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 13px;
+      border-radius: 20px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .camp-visual:hover .camp-watch-badge { opacity: 1; transform: translateY(0); }
+    .camp-platform-badge {
+      position: absolute;
+      bottom: 14px; left: 16px;
+      z-index: 2;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Info panel */
+    .camp-info {
+      background: var(--cream);
+      padding: 22px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .camp-title {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--deep);
+      line-height: 1.2;
+    }
+    .camp-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.7;
+      min-height: 42px; /* placeholder space */
+    }
+    .camp-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 4px;
+    }
+    .camp-tag {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border: 1px solid var(--sand);
+      border-radius: 20px;
+      color: var(--warm);
+      transition: background 0.3s, color 0.3s;
+    }
+    .camp-tag:hover { background: var(--warm); color: var(--cream); }
+
+    /* ── Carousel ────────────────────────────────── */
+    .carousel-wrap {
+      position: absolute; inset: 0;
+      overflow: hidden;
+    }
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(.25,.46,.45,.94);
+    }
+    .carousel-slide {
+      min-width: 100%; height: 100%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #1a1008;
+    }
+    .carousel-slide img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      z-index: 3;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s, background 0.2s;
+    }
+    .camp-visual:hover .carousel-btn { opacity: 1; }
+    .carousel-btn:hover { background: rgba(255,255,255,0.28); }
+    .carousel-prev { left: 14px; }
+    .carousel-next { right: 14px; }
+    .carousel-dots {
+      position: absolute;
+      bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 6px;
+      z-index: 3;
+    }
+    .carousel-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+    }
+    .carousel-dot.active { background: #fff; transform: scale(1.3); }
+
+    /* Platform badge colours */
+    .platform-fb .platform-dot { background: #6B8DD6; }
+    .platform-yt .platform-dot { background: #C0584A; }
+    .platform-fb { color: #b0badd; }
+    .platform-yt { color: #d4a090; }
+
+    /* Placeholder shimmer (graphic) */
+    .work-card {
+      background: var(--linen);
+      aspect-ratio: 4/5;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(.25,.46,.45,.94);
+    }
+    .work-card:hover { transform: translateY(-6px); }
+    .work-card-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        110deg,
+        var(--linen) 30%,
+        var(--sand) 50%,
+        var(--linen) 70%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+    .work-card-num {
+      position: absolute;
+      top: 24px; left: 28px;
+      font-family: 'Caveat', cursive;
+      font-size: 48px;
+      color: rgba(255,255,255,0.25);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .work-card-coming {
+      position: absolute;
+      bottom: 28px; left: 28px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tan);
+    }
+
+    /* ── Contact ─────────────────────────────────── */
+    #contact {
+      background: var(--deep);
+      color: var(--sand);
+    }
+    #contact .section-label { color: var(--tan); }
+    #contact .section-heading { color: var(--linen); }
+
+    .contact-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 900px;
+    }
+    .contact-text {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--sand);
+      margin-bottom: 40px;
+    }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen);
+      text-decoration: none;
+      border-bottom: 1px solid var(--warm);
+      padding-bottom: 4px;
+      transition: gap 0.3s, color 0.3s;
+    }
+    .contact-link:hover { gap: 20px; color: var(--tan); }
+    .contact-link + .contact-link { margin-left: 28px; }
+
+    .contact-info-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .contact-info-value {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--linen);
+      display: block;
+      margin-bottom: 28px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      background: var(--deep);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-name {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: var(--muted);
+    }
+    .footer-copy {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── Divider ─────────────────────────────────── */
+    .thin-line {
+      width: 40px; height: 1px;
+      background: var(--tan);
+      margin-bottom: 32px;
+    }
+
+    /* ── Animations ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideLine {
+      0%   { left: -100%; }
+      50%  { left: 0; }
+      100% { left: 100%; }
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Scroll-triggered fade-up */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 24px 30px; }
+      nav.scrolled { padding: 16px 30px; }
+      section { padding: 80px 30px; }
+      #hero { padding: 100px 30px 70px; }
+      .hero-scroll { left: 30px; }
+      .hero-deco-2 { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 50px; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .campaign-grid { grid-template-columns: 1fr 1fr; }
+      .camp-sluk    { grid-column: 1; grid-row: 1; }
+      .camp-detokay { grid-column: 2; grid-row: 1; }
+      .camp-afh     { grid-column: 1; grid-row: 2; }
+      .camp-nomi    { grid-column: 2; grid-row: 2; }
+      .camp-dele    { grid-column: 1 / 3; grid-row: 3; }
+      .camp-detokay .camp-visual { aspect-ratio: 9/16; }
+      .camp-dele    .camp-visual { aspect-ratio: 16/9; }
+      .contact-body { grid-template-columns: 1fr; gap: 50px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px 30px; }
+    }
+    @media (max-width: 560px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .campaign-grid { grid-template-columns: 1fr; }
+      .camp-sluk, .camp-detokay, .camp-afh,
+      .camp-nomi, .camp-dele { grid-column: 1; grid-row: auto; }
+      .camp-detokay .camp-visual { aspect-ratio: 4/3; }
+      .work-tabs { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-name">Leonora Thomsen</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-deco-2">LT</div>
+    <p class="hero-eyebrow">Creative Direction &amp; Content</p>
+    <h1 class="hero-name">Leonora<br>Thomsen</h1>
+    <p class="hero-title">Content &amp; Growth / Social Media Specialist</p>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <img class="about-img" src="headshot.png" alt="Leonora Thomsen" />
+      </div>
+      <div class="about-content">
+        <span class="section-label reveal">About me</span>
+        <h2 class="section-heading reveal">Who<br>I am</h2>
+        <div class="thin-line reveal"></div>
+        <p class="about-text reveal reveal-delay-1">
+          I work at the intersection of creative direction and hands-on content creation. I develop social-first ideas, formats and campaigns with a strong understanding of how content moves across platforms. I combine creative thinking with execution, shaping ideas from concept to final content and ensuring they feel native, relevant and engaging.
+        </p>
+        <p class="about-text reveal reveal-delay-2">
+          My strength lies in turning trends, cultural signals and audience behaviour into content that cuts through. I focus on building formats and creative directions that can scale, evolve and continuously engage audiences over time.
+        </p>
+        <p class="about-text reveal reveal-delay-3" style="margin-bottom: 40px;">
+          I thrive in collaborative environments, working closely with creators, strategists and stakeholders to bring ideas to life and raise the creative level across teams.
+        </p>
+        <span class="skills-label reveal">Areas of expertise</span>
+        <div class="skills-list reveal reveal-delay-1">
+          <span class="skill-tag">Kreativ konceptudvikling</span>
+          <span class="skill-tag">Content produktion</span>
+          <span class="skill-tag">SoMe trends og formater</span>
+          <span class="skill-tag">Video produktion</span>
+          <span class="skill-tag">Growth og performance</span>
+          <span class="skill-tag">Socials strategi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Work ── -->
+  <section id="work">
+    <span class="section-label reveal">Portfolio</span>
+    <h2 class="section-heading reveal">My Work</h2>
+
+    <div class="work-tabs reveal">
+      <button class="work-tab active" onclick="switchTab(this, 'campaigns')">Campaigns</button>
+      <button class="work-tab" onclick="switchTab(this, 'social')">Social-first content</button>
+      <button class="work-tab" onclick="switchTab(this, 'graphic')">Graphic content</button>
+    </div>
+
+    <!-- Campaigns -->
+    <div class="work-panel active" id="panel-campaigns">
+      <div class="campaign-grid">
+
+        <!-- 1: SlukSammen Campaign Hero -->
+        <div class="camp-sluk reveal">
+          <div class="camp-brick">
+            <a class="camp-visual" href="https://www.instagram.com/reel/C-RoNM1C0W4/" target="_blank" rel="noopener">
+              <div class="camp-visual-bg" style="background-image: url('thumbs/camp-1.jpg');"></div>
+              <span class="camp-watch-badge">Watch ↗</span>
+              <div class="camp-platform-badge"><span class="platform-dot"></span>Instagram</div>
+            </a>
+            <div class="camp-info">
+              <div class="camp-title">SlukSammen Campaign Hero</div>
+              <p class="camp-desc">Add campaign description here — what was the brief, what did you create?</p>
+              <div class="camp-tags">
+                <span class="camp-tag">Campaign film concept</span>
+                <span class="camp-tag">Content strategy</span>
+                <span class="camp-tag">Campaign project management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2: Det okay Campaign — carousel -->
+        <div class="camp-detokay reveal reveal-delay-1">
+          <div class="camp-brick">
+            <a class="camp-visual" href="https://headspace.dk/det-okay/" target="_blank" rel="noopener">
+              <div class="carousel-wrap">
+                <div class="carousel-track" id="detokay-track">
+                  <div class="carousel-slide"><img src="Det Okay new/first.PNG" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Det Okay new/third.PNG" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Det Okay new/Anna langt citat.PNG" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Det Okay new/C4C5BCF3-4042-4ED2-B091-5DCDBA8D50C6.JPG" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Det Okay new/Skærmbillede 2026-03-27 kl. 11.22.10.png" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="thumbs/camp-2b.jpg" alt="Det Okay podcast" /></div>
+                </div>
+              </div>
+              <span class="camp-watch-badge">View ↗</span>
+              <button class="carousel-btn carousel-prev" onclick="event.preventDefault(); carouselMove('detokay',-1)">&#8592;</button>
+              <button class="carousel-btn carousel-next" onclick="event.preventDefault(); carouselMove('detokay',1)">&#8594;</button>
+              <div class="carousel-dots" id="detokay-dots">
+                <button class="carousel-dot active" onclick="event.preventDefault(); carouselGo('detokay',0)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',1)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',2)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',3)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',4)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',5)"></button>
+              </div>
+              <div class="camp-platform-badge"><span class="platform-dot"></span>Campaign</div>
+            </a>
+            <div class="camp-info">
+              <div class="camp-title">Det Okay Campaign</div>
+              <p class="camp-desc">Add campaign description here — what was the brief, what did you create?</p>
+              <div class="camp-tags">
+                <span class="camp-tag">Campaign concept</span>
+                <span class="camp-tag">Visuals</span>
+                <span class="camp-tag">Campaign project management</span>
+                <span class="camp-tag">Ambassador collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3: AFHØRINGEN -->
+        <div class="camp-afh reveal">
+          <div class="camp-brick">
+            <a class="camp-visual" href="https://www.facebook.com/watch/?v=300734438535449" target="_blank" rel="noopener">
+              <div class="camp-visual-bg platform-fb" style="background-image: url('thumbs/camp-3.jpg');"></div>
+              <span class="camp-watch-badge">Watch ↗</span>
+              <div class="camp-platform-badge platform-fb"><span class="platform-dot"></span>Facebook</div>
+            </a>
+            <div class="camp-info">
+              <div class="camp-title">AFHØRINGEN</div>
+              <p class="camp-desc">Add campaign description here — what was the brief, what did you create?</p>
+              <div class="camp-tags">
+                <span class="camp-tag">Campaign film concept</span>
+                <span class="camp-tag">Content strategy</span>
+                <span class="camp-tag">Campaign project management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4: Nomi&Loke x Rasmus Søndergaard -->
+        <div class="camp-nomi reveal reveal-delay-1">
+          <div class="camp-brick">
+            <a class="camp-visual" href="https://www.tiktok.com/@headspacedanmark/video/7449675453717318935" target="_blank" rel="noopener">
+              <div class="camp-visual-bg" style="background-image: url('thumbs/camp-4.jpg');"></div>
+              <span class="camp-watch-badge">Watch ↗</span>
+              <div class="camp-platform-badge"><span class="platform-dot"></span>TikTok</div>
+            </a>
+            <div class="camp-info">
+              <div class="camp-title">Nomi&amp;Loke × Rasmus Søndergaard × headspace</div>
+              <p class="camp-desc">Add campaign description here — what was the brief, what did you create?</p>
+              <div class="camp-tags">
+                <span class="camp-tag">Campaign concept</span>
+                <span class="camp-tag">Content strategy</span>
+                <span class="camp-tag">Creator collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5: DeleForældre -->
+        <div class="camp-dele reveal reveal-delay-2">
+          <div class="camp-brick">
+            <a class="camp-visual" href="https://www.youtube.com/watch?v=KWEhoUIfpSs" target="_blank" rel="noopener">
+              <div class="camp-visual-bg platform-yt" style="background-image: url('thumbs/camp-5.jpg');"></div>
+              <span class="camp-watch-badge">Watch ↗</span>
+              <div class="camp-platform-badge platform-yt"><span class="platform-dot"></span>YouTube</div>
+            </a>
+            <div class="camp-info">
+              <div class="camp-title">DeleForældre Campaign Film</div>
+              <p class="camp-desc">Add campaign description here — what was the brief, what did you create?</p>
+              <div class="camp-tags">
+                <span class="camp-tag">Campaign film concept</span>
+                <span class="camp-tag">Content strategy</span>
+                <span class="camp-tag">Campaign project management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Social-first -->
+    <div class="work-panel" id="panel-social">
+      <div class="work-grid">
+
+        <!-- 0: Forventninger -->
+        <a class="content-card reveal" href="https://www.instagram.com/reel/C4x9QkYsQKd/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-0.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Forventninger</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Shoot</span>
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 1: Just a crazy TikTok video -->
+        <a class="content-card reveal" href="https://www.tiktok.com/@headspacedanmark/video/7320529458904026400" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('Thumb for tiktok .png');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>TikTok</div>
+            <div class="content-card-title">Just a crazy TikTok video</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Shoot</span>
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2: TikTok explainer / Host -->
+        <a class="content-card reveal reveal-delay-1" href="https://www.tiktok.com/@headspacedanmark/video/7310160356792405280" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-2.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>TikTok</div>
+            <div class="content-card-title">TikTok Explainer / Host</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Storytelling</span>
+              <span class="content-tag">Host</span>
+              <span class="content-tag">Social-first</span>
+              <span class="content-tag">Edit</span>
+              <span class="content-tag">Script</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3: TikTok trend - Great Tip -->
+        <a class="content-card reveal reveal-delay-2" href="https://www.tiktok.com/@headspacedanmark/video/7307929701551443232" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-3.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>TikTok</div>
+            <div class="content-card-title">TikTok Trend — Great Tip</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Trend</span>
+              <span class="content-tag">Social-first</span>
+              <span class="content-tag">Edit</span>
+              <span class="content-tag">Script</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 4: Studio video (Instagram) -->
+        <a class="content-card reveal" href="https://www.instagram.com/p/Cv67vlugsWC/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-4.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Studio Video</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Edits</span>
+              <span class="content-tag">Creative Concept</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 5: You are young and busy -->
+        <a class="content-card reveal reveal-delay-1" href="https://www.tiktok.com/@headspacedanmark/video/7421855918276627745" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-5.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>TikTok</div>
+            <div class="content-card-title">You Are Young and Busy</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Storytelling</span>
+              <span class="content-tag">Copy</span>
+              <span class="content-tag">Shoot</span>
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 6: SlukSammen for Socials -->
+        <a class="content-card reveal reveal-delay-2" href="https://www.tiktok.com/@headspacedanmark/video/7402561352952302881" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-6.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>TikTok</div>
+            <div class="content-card-title">SlukSammen for Socials</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Shoot</span>
+              <span class="content-tag">Hook</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 8: Ungecitater læst højt -->
+        <a class="content-card reveal" href="https://www.instagram.com/reel/C8T1JEuMGRh/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-8.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Ungecitater læst højt</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Film</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 9: 4 ting jeg gerne ville have vidst -->
+        <a class="content-card reveal reveal-delay-1" href="https://www.instagram.com/reel/C86q4NkquY_/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-9.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">4 ting jeg gerne ville have vidst</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Film</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 7: Jeg giver telefonen videre -->
+        <a class="content-card reveal reveal-delay-2" href="https://www.tiktok.com/@headspacedanmark/video/7353611309860146464" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/social-7.jpg');"></div>
+          <span class="content-card-watch">Watch ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>TikTok</div>
+            <div class="content-card-title">"Jeg giver telefonen videre.."</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Concept</span>
+              <span class="content-tag">Platform-native trend</span>
+              <span class="content-tag">Edit</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Graphic -->
+    <div class="work-panel" id="panel-graphic">
+      <div class="work-grid">
+
+        <!-- 1: Det Okay campaign - Ole Henriksen -->
+        <a class="content-card reveal" href="https://www.instagram.com/p/CfuAArFMPTK/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-1.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Det Okay — Ole Henriksen</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Photo: Petra Kleis</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2: Det Okay - ambassadors -->
+        <a class="content-card reveal reveal-delay-1" href="https://www.instagram.com/p/CeVqsTvMKXc/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-2.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Det Okay — Ambassadors</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Photo: Petra Kleis</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3: New year resolution -->
+        <a class="content-card reveal reveal-delay-2" href="https://www.instagram.com/p/CYCUJKJMSNJ/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-3.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">New Year Resolution</div>
+            <div class="content-card-tags">
+            </div>
+          </div>
+        </a>
+
+        <!-- 4: Creative copywriting 1 -->
+        <a class="content-card reveal" href="https://www.instagram.com/p/CVSiCtpsm6S/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-4.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Creative Copywriting</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Creative writing</span>
+              <span class="content-tag">Storytelling</span>
+              <span class="content-tag">Graphic design</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 5: Creative copywriting 2 -->
+        <a class="content-card reveal reveal-delay-1" href="https://www.instagram.com/p/ChooUxKM0tH/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-5.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Creative Copywriting</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Creative writing</span>
+              <span class="content-tag">Storytelling</span>
+              <span class="content-tag">Graphic design</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 6: Ordbog -->
+        <a class="content-card reveal reveal-delay-2" href="https://www.instagram.com/p/C0toYDzsQNM/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-6.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Ordbog</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Creative format</span>
+              <span class="content-tag">Creative writing</span>
+              <span class="content-tag">Storytelling</span>
+              <span class="content-tag">Graphic design</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 7: Zoom -->
+        <a class="content-card reveal" href="https://www.instagram.com/p/Cy5aUsmsStY/" target="_blank" rel="noopener">
+          <div class="content-card-bg" style="background-image: url('thumbs/graphic-7.jpg');"></div>
+          <span class="content-card-watch">View ↗</span>
+          <div class="content-card-body">
+            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
+            <div class="content-card-title">Zoom</div>
+            <div class="content-card-tags">
+              <span class="content-tag">Creative format</span>
+              <span class="content-tag">Creative writing</span>
+              <span class="content-tag">Storytelling</span>
+              <span class="content-tag">Graphic design</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="contact-body">
+      <div>
+        <span class="section-label reveal">Get in touch</span>
+        <h2 class="section-heading reveal">Let's<br>talk</h2>
+        <p class="contact-text reveal">
+          Whether you're looking for a creative collaborator, a social content strategist, or someone who can bring a campaign to life from idea to execution — I'd love to hear from you.
+        </p>
+        <div class="reveal">
+          <a class="contact-link" href="mailto:hello@leonorathomsen.com">
+            hello@leonorathomsen.com →
+          </a>
+        </div>
+      </div>
+      <div>
+        <span class="contact-info-label reveal">Based in</span>
+        <span class="contact-info-value reveal">Copenhagen, DK</span>
+
+        <span class="contact-info-label reveal">Find me</span>
+        <span class="contact-info-value reveal" style="font-size:18px;">
+          <a href="#" class="contact-link" style="font-family:inherit; font-size:18px; letter-spacing:0; text-transform:none; border:none; padding:0; color:var(--linen); display:block; margin-bottom:10px;">LinkedIn ↗</a>
+          <a href="#" class="contact-link" style="font-family:inherit; font-size:18px; letter-spacing:0; text-transform:none; border:none; padding:0; color:var(--linen); display:block;">Instagram ↗</a>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-name">Leonora Thomsen</span>
+    <span class="footer-copy">© 2025 — Content &amp; Growth / Social Media Specialist</span>
+  </footer>
+
+  <script>
+    // ── Cursor ────────────────────────────────────
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .skill-tag, .work-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '16px';
+        cursor.style.height = '16px';
+        ring.style.width = '52px';
+        ring.style.height = '52px';
+        ring.style.borderColor = 'var(--brown)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px';
+        cursor.style.height = '10px';
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.borderColor = 'var(--tan)';
+      });
+    });
+
+    // ── Navbar scroll ─────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Scroll reveal ─────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Carousel ─────────────────────────────────
+    const carouselState = {};
+    function carouselInit(id, total) {
+      carouselState[id] = { index: 0, total };
+    }
+    function carouselGo(id, index) {
+      const state = carouselState[id];
+      if (!state) return;
+      state.index = index;
+      document.getElementById(id + '-track').style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll(`#${id}-dots .carousel-dot`).forEach((d, i) =>
+        d.classList.toggle('active', i === index));
+    }
+    function carouselMove(id, dir) {
+      const state = carouselState[id];
+      if (!state) return;
+      carouselGo(id, (state.index + dir + state.total) % state.total);
+    }
+    carouselInit('detokay', 6);
+
+    // ── Work tabs ────────────────────────────────
+    function switchTab(btn, panelId) {
+      document.querySelectorAll('.work-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.work-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + panelId).classList.add('active');
+
+      // Re-trigger reveals in newly shown panel
+      document.querySelectorAll('#panel-' + panelId + ' .reveal').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 50);
+      });
+    }
+  </script>
+</body>
+</html>
