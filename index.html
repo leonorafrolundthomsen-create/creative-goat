@@ -317,25 +317,21 @@
     .work-panel.active { display: block; }
 
     #panel-graphic .work-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      justify-items: center;
     }
-    #panel-graphic .content-card {
-      aspect-ratio: 1/1;
-      overflow: visible;
+    .ig-embed-wrap {
+      width: 100%;
+      max-width: 400px;
     }
-    #panel-graphic .content-card-bg {
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: var(--linen);
+    .ig-embed-wrap iframe {
+      width: 100%;
+      height: 505px;
+      border: none;
       border-radius: 4px;
-    }
-    #panel-graphic .content-card:hover .content-card-bg {
-      transform: none;
-    }
-    #panel-graphic .content-card::after {
-      border-radius: 4px;
+      display: block;
+      background: var(--linen);
     }
 
     .work-grid {
@@ -796,6 +792,7 @@
       .about-grid { grid-template-columns: 1fr; gap: 50px; }
       .work-grid { grid-template-columns: repeat(2, 1fr); }
       #panel-graphic .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .ig-embed-wrap iframe { height: 460px; }
       .campaign-grid { grid-template-columns: 1fr 1fr; }
       .camp-sluk    { grid-column: 1; grid-row: 1; }
       .camp-detokay { grid-column: 2; grid-row: 1; }
@@ -1198,105 +1195,40 @@
     <div class="work-panel" id="panel-graphic">
       <div class="work-grid">
 
-        <!-- 1: Det Okay campaign - Ole Henriksen -->
-        <a class="content-card reveal" href="https://www.instagram.com/p/CfuAArFMPTK/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-1.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">Det Okay — Ole Henriksen</div>
-            <div class="content-card-tags">
-              <span class="content-tag">Photo: Petra Kleis</span>
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal">
+          <iframe src="https://www.instagram.com/p/CfuAArFMPTK/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
-        <!-- 2: Det Okay - ambassadors -->
-        <a class="content-card reveal reveal-delay-1" href="https://www.instagram.com/p/CeVqsTvMKXc/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-2.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">Det Okay — Ambassadors</div>
-            <div class="content-card-tags">
-              <span class="content-tag">Photo: Petra Kleis</span>
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal reveal-delay-1">
+          <iframe src="https://www.instagram.com/p/CeVqsTvMKXc/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
-        <!-- 3: New year resolution -->
-        <a class="content-card reveal reveal-delay-2" href="https://www.instagram.com/p/CYCUJKJMSNJ/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-3.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">New Year Resolution</div>
-            <div class="content-card-tags">
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal reveal-delay-2">
+          <iframe src="https://www.instagram.com/p/CYCUJKJMSNJ/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
-        <!-- 4: Creative copywriting 1 -->
-        <a class="content-card reveal" href="https://www.instagram.com/p/CVSiCtpsm6S/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-4.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">Creative Copywriting</div>
-            <div class="content-card-tags">
-              <span class="content-tag">Creative writing</span>
-              <span class="content-tag">Storytelling</span>
-              <span class="content-tag">Graphic design</span>
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal">
+          <iframe src="https://www.instagram.com/p/CVSiCtpsm6S/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
-        <!-- 5: Creative copywriting 2 -->
-        <a class="content-card reveal reveal-delay-1" href="https://www.instagram.com/p/ChooUxKM0tH/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-5.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">Creative Copywriting</div>
-            <div class="content-card-tags">
-              <span class="content-tag">Creative writing</span>
-              <span class="content-tag">Storytelling</span>
-              <span class="content-tag">Graphic design</span>
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal reveal-delay-1">
+          <iframe src="https://www.instagram.com/p/ChooUxKM0tH/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
-        <!-- 6: Ordbog -->
-        <a class="content-card reveal reveal-delay-2" href="https://www.instagram.com/p/C0toYDzsQNM/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-6.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">Ordbog</div>
-            <div class="content-card-tags">
-              <span class="content-tag">Creative format</span>
-              <span class="content-tag">Creative writing</span>
-              <span class="content-tag">Storytelling</span>
-              <span class="content-tag">Graphic design</span>
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal reveal-delay-2">
+          <iframe src="https://www.instagram.com/p/C0toYDzsQNM/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
-        <!-- 7: Zoom -->
-        <a class="content-card reveal" href="https://www.instagram.com/p/Cy5aUsmsStY/" target="_blank" rel="noopener">
-          <div class="content-card-bg" style="background-image: url('thumbs/graphic-7.jpg');"></div>
-          <span class="content-card-watch">View ↗</span>
-          <div class="content-card-body">
-            <div class="content-card-platform"><span class="platform-dot"></span>Instagram</div>
-            <div class="content-card-title">Zoom</div>
-            <div class="content-card-tags">
-              <span class="content-tag">Creative format</span>
-              <span class="content-tag">Creative writing</span>
-              <span class="content-tag">Storytelling</span>
-              <span class="content-tag">Graphic design</span>
-            </div>
-          </div>
-        </a>
+        <div class="ig-embed-wrap reveal">
+          <iframe src="https://www.instagram.com/p/Cy5aUsmsStY/embed/captioned/"
+            frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
 
       </div>
     </div>
