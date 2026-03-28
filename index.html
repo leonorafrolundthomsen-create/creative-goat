@@ -34,27 +34,13 @@
       overflow-x: hidden;
     }
 
-    /* ── Cursor ──────────────────────────────────── */
-    .cursor {
-      width: 10px; height: 10px;
-      background: var(--brown);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-      mix-blend-mode: multiply;
+    /* ── Goat cursor (desktop only) ─────────────── */
+    body {
+      cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="26" font-size="26">🐐</text></svg>') 16 16, auto;
     }
-    .cursor-ring {
-      width: 36px; height: 36px;
-      border: 1px solid var(--tan);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.35s cubic-bezier(.25,.46,.45,.94), width 0.3s, height 0.3s, border-color 0.3s;
+    a, button, [role="button"], .camp-visual, .content-card, .ig-embed-wrap {
+      cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="26" font-size="26">🐐</text></svg>') 16 16, pointer;
     }
-    body:hover .cursor { opacity: 1; }
 
     /* ── Navigation ──────────────────────────────── */
     nav {
@@ -914,10 +900,6 @@
 </head>
 <body>
 
-  <!-- Custom cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
   <!-- Navigation -->
   <nav id="navbar">
     <a href="#about" class="nav-name">Leonora Thomsen</a>
@@ -1405,41 +1387,6 @@
   </footer>
 
   <script>
-    // ── Cursor ────────────────────────────────────
-    const cursor = document.getElementById('cursor');
-    const ring   = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-    });
-
-    function animateRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    document.querySelectorAll('a, button, .skill-tag, .work-card').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '16px';
-        cursor.style.height = '16px';
-        ring.style.width = '52px';
-        ring.style.height = '52px';
-        ring.style.borderColor = 'var(--brown)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '10px';
-        cursor.style.height = '10px';
-        ring.style.width = '36px';
-        ring.style.height = '36px';
-        ring.style.borderColor = 'var(--tan)';
-      });
-    });
-
     // ── Navbar scroll ─────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
