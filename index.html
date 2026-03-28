@@ -383,10 +383,18 @@
       overflow: hidden;
       box-shadow: 0 8px 32px rgba(62,42,24,0.10);
     }
-    .more-video-card video {
+    .more-video-player {
+      position: relative;
       width: 100%;
+      aspect-ratio: 16/9;
+    }
+    .more-video-player iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px 8px 0 0;
       display: block;
-      background: var(--deep);
     }
     .more-video-meta {
       padding: 18px 22px 22px;
@@ -1341,10 +1349,15 @@
       <div id="more-content" class="gate-content">
         <div class="more-video-wrap">
           <div class="more-video-card">
-            <video controls playsinline preload="metadata">
-              <source src="dunkelflaute.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div class="more-video-player">
+              <iframe
+                src="https://player.vimeo.com/video/1163748676?badge=0&autopause=0&player_id=0&app_id=58479"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowfullscreen
+                title="Dunkelflaute"
+              ></iframe>
+            </div>
             <div class="more-video-meta">
               <span class="more-video-label">Campaign film</span>
               <div class="more-video-title">Dunkelflaute</div>
