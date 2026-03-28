@@ -288,6 +288,89 @@
     .work-panel { display: none; }
     .work-panel.active { display: block; }
 
+    /* ── "More" tab password gate ─────────────────── */
+    .gate-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .gate-icon {
+      font-size: 28px;
+      margin-bottom: 28px;
+      opacity: 0.45;
+    }
+    .gate-msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 2.2vw, 22px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text);
+      max-width: 420px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+    .gate-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 14px 20px;
+      background: var(--linen);
+      border: 1px solid var(--sand);
+      border-radius: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--deep);
+      letter-spacing: 0.25em;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .gate-input:focus { border-color: var(--tan); }
+    .gate-input::placeholder { letter-spacing: 0.1em; color: var(--muted); }
+    .gate-btn {
+      padding: 13px 40px;
+      background: var(--deep);
+      color: var(--cream);
+      border: none;
+      border-radius: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .gate-btn:hover { background: var(--brown); transform: translateY(-1px); }
+    .gate-error {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm);
+      opacity: 0;
+      transition: opacity 0.3s;
+      margin-top: -4px;
+    }
+    .gate-error.visible { opacity: 1; }
+    .gate-content { display: none; }
+    .gate-content.unlocked { display: block; }
+    .more-placeholder {
+      text-align: center;
+      padding: 80px 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--muted);
+    }
+
     #panel-graphic .work-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
@@ -856,6 +939,7 @@
       <button class="work-tab active" onclick="switchTab(this, 'campaigns')">Campaigns</button>
       <button class="work-tab" onclick="switchTab(this, 'social')">Social-first content</button>
       <button class="work-tab" onclick="switchTab(this, 'graphic')">Graphic content</button>
+      <button class="work-tab" onclick="switchTab(this, 'more')">More</button>
     </div>
 
     <!-- Campaigns -->
@@ -1204,6 +1288,26 @@
 
       </div>
     </div>
+
+    <!-- More (password-gated) -->
+    <div class="work-panel" id="panel-more">
+
+      <div id="more-gate" class="gate-wrap">
+        <div class="gate-icon">🔒</div>
+        <p class="gate-msg">This section contains unreleased work.<br>Enter the password to continue.</p>
+        <div class="gate-form">
+          <input id="more-input" class="gate-input" type="password" placeholder="Password" autocomplete="off" />
+          <button class="gate-btn" onclick="checkMorePassword()">Enter</button>
+          <span id="more-error" class="gate-error">Incorrect password</span>
+        </div>
+      </div>
+
+      <div id="more-content" class="gate-content">
+        <p class="more-placeholder">Content coming soon.</p>
+      </div>
+
+    </div>
+
   </section>
 
   <!-- ── Contact ── -->
@@ -1327,6 +1431,32 @@
         setTimeout(() => el.classList.add('visible'), 50);
       });
     }
+
+    // ── More tab password gate ────────────────────
+    const MORE_PASSWORD = '54321';
+
+    function checkMorePassword() {
+      const input = document.getElementById('more-input');
+      const error = document.getElementById('more-error');
+      if (input.value === MORE_PASSWORD) {
+        document.getElementById('more-gate').style.display = 'none';
+        document.getElementById('more-content').classList.add('unlocked');
+      } else {
+        error.classList.add('visible');
+        input.value = '';
+        input.focus();
+        setTimeout(() => error.classList.remove('visible'), 2400);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('more-input');
+      if (input) {
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') checkMorePassword();
+        });
+      }
+    });
   </script>
 </body>
 </html>
