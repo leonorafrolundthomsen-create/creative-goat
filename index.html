@@ -99,15 +99,7 @@
     .nav-links li:nth-child(3) a { animation-delay: 0.5s; }
     .nav-links a:hover { color: var(--brown); }
 
-    /* ── Hero ────────────────────────────────────── */
-    #hero {
-      min-height: 50vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: flex-start;
-      padding: 120px 60px 20px;
-      position: relative;
-      overflow: hidden;
-    }
+    /* ── Hero eyebrow (lives inside merged #about) ── */
     .hero-eyebrow {
       font-size: 11px;
       letter-spacing: 0.2em;
@@ -137,30 +129,6 @@
       letter-spacing: 0.04em;
       opacity: 0;
       animation: fadeUp 1s ease 0.8s forwards;
-    }
-    .hero-scroll {
-      position: absolute;
-      bottom: 48px; left: 60px;
-      display: flex; align-items: center; gap: 14px;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0;
-      animation: fadeUp 1s ease 1.2s forwards;
-    }
-    .hero-scroll-line {
-      width: 40px; height: 1px;
-      background: var(--tan);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-scroll-line::after {
-      content: '';
-      position: absolute; top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: var(--brown);
-      animation: slideLine 2s ease-in-out 1.5s infinite;
     }
     .hero-deco {
       position: absolute;
@@ -206,10 +174,14 @@
       margin-bottom: 60px;
     }
 
-    /* ── About ───────────────────────────────────── */
+    /* ── Hero + About merged ─────────────────────── */
     #about {
-      background: var(--linen);
-      padding-top: 40px;
+      padding: 120px 60px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-intro {
+      margin-bottom: 80px;
     }
     .about-grid {
       display: grid;
@@ -786,8 +758,7 @@
       nav { padding: 24px 30px; }
       nav.scrolled { padding: 16px 30px; }
       section { padding: 80px 30px; }
-      #hero { padding: 100px 30px 10px; }
-      .hero-scroll { left: 30px; }
+      #about { padding: 80px 30px 80px; }
       .hero-deco-2 { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 50px; }
       .work-grid { grid-template-columns: repeat(2, 1fr); }
@@ -822,7 +793,7 @@
 
   <!-- Navigation -->
   <nav id="navbar">
-    <a href="#hero" class="nav-name">Leonora Thomsen</a>
+    <a href="#about" class="nav-name">Leonora Thomsen</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
@@ -830,21 +801,17 @@
     </ul>
   </nav>
 
-  <!-- ── Hero ── -->
-  <section id="hero">
+  <!-- ── Hero + About (merged) ── -->
+  <section id="about">
     <div class="hero-deco"></div>
     <div class="hero-deco-2">LT</div>
-    <p class="hero-eyebrow">Creative Direction &amp; Content</p>
-    <h1 class="hero-name">Leonora<br>Thomsen</h1>
-    <p class="hero-title">Content &amp; Growth / Social Media Specialist</p>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      scroll
-    </div>
-  </section>
 
-  <!-- ── About ── -->
-  <section id="about">
+    <div class="hero-intro">
+      <p class="hero-eyebrow">Creative Direction &amp; Content</p>
+      <h1 class="hero-name">Leonora<br>Thomsen</h1>
+      <p class="hero-title">Content &amp; Growth / Social Media Specialist</p>
+    </div>
+
     <div class="about-grid">
       <div class="about-image-wrap reveal">
         <img class="about-img" src="headshot.png" alt="Leonora Thomsen" />
@@ -854,13 +821,16 @@
         <h2 class="section-heading reveal">Who<br>I am</h2>
         <div class="thin-line reveal"></div>
         <p class="about-text reveal reveal-delay-1">
-          I work at the intersection of creative direction and hands-on content creation. I develop social-first ideas, formats and campaigns with a strong understanding of how content moves across platforms. I combine creative thinking with execution, shaping ideas from concept to final content and ensuring they feel native, relevant and engaging.
+          I work where creative direction meets hands-on making. I develop social-first ideas, formats, and campaigns with a sharp eye for how content moves, lands, and resonates across platforms.
         </p>
         <p class="about-text reveal reveal-delay-2">
-          My strength lies in turning trends, cultural signals and audience behaviour into content that cuts through. I focus on building formats and creative directions that can scale, evolve and continuously engage audiences over time.
+          I'm a strategic thinker and a creative maker. I turn ideas and strategy into digital worlds people actually want to be part of. With a background in campaigning and social media strategy, I build stories, visuals, and formats that connect brands and audiences in meaningful ways.
         </p>
-        <p class="about-text reveal reveal-delay-3" style="margin-bottom: 40px;">
-          I thrive in collaborative environments, working closely with creators, strategists and stakeholders to bring ideas to life and raise the creative level across teams.
+        <p class="about-text reveal reveal-delay-3">
+          My strength? Turning trends, cultural signals, and audience behaviour into content that cuts through the noise. I find that sweet spot where creativity meets strategy, where content doesn't just look good but feels like something worth engaging with. Because concept is everything.
+        </p>
+        <p class="about-text reveal" style="margin-bottom: 40px;">
+          I focus on building creative directions and formats that can scale, evolve, and keep audiences coming back. And I thrive in collaborative environments, working closely with creators, strategists, and stakeholders to raise the bar and bring ideas to life.
         </p>
         <span class="skills-label reveal">Areas of expertise</span>
         <div class="skills-list reveal reveal-delay-1">
