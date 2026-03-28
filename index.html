@@ -908,73 +908,55 @@
       .campaign-grid { grid-template-columns: 1fr; }
       .camp-sluk, .camp-detokay, .camp-afh,
       .camp-nomi, .camp-dele { grid-column: 1; grid-row: auto; }
-      .camp-detokay .camp-visual { aspect-ratio: 4/3; }
       .work-tabs { overflow-x: auto; }
     }
 
     /* ── Mobile-only fixes ───────────────────────── */
-    .nav-name-emoji { display: none; }
-
-    /* Mobile scroll fallback — hidden on desktop */
-    .detokay-mobile-scroll { display: none; }
-
-    /* Desktop carousel — always visible on desktop */
-    .camp-visual-desktop { display: block; }
+    /* These two classes toggle which Det Okay version shows */
+    .nav-name-emoji       { display: none; }
+    .detokay-mobile-thumb { display: none; }  /* mobile-only, hidden on desktop */
+    .camp-visual-desktop  { display: block; } /* desktop carousel, always on */
 
     @media (max-width: 768px) {
-      /* Swap name → goat emoji in nav */
+      /* ── Nav: swap full name for goat emoji ──── */
       .nav-name-text  { display: none; }
       .nav-name-emoji { display: inline; font-size: 26px; line-height: 1; }
-      /* Tighten nav so links don't crowd */
-      nav { padding: 14px 20px; }
-      nav.scrolled { padding: 10px 20px; }
-      .nav-links { gap: 18px; }
-      .nav-links a { font-size: 11px; }
+      nav             { padding: 14px 20px; }
+      nav.scrolled    { padding: 10px 20px; }
+      .nav-links      { gap: 18px; }
+      .nav-links a    { font-size: 11px; }
 
-      /* Hide desktop carousel on mobile */
-      .camp-visual-desktop { display: none !important; }
-
-      /* Cap all campaign thumbnail heights on mobile — aspect-ratio on full-width
-         column creates 700px+ tall cards. Override with explicit height. */
-      .camp-visual {
-        height: 230px !important;
+      /* ── Campaign cards: compact 180px thumbnails ──
+         .camp-visual is position:relative; its child .camp-visual-bg is
+         position:absolute;inset:0 with background-image — so fixing the
+         parent height fixes the visible thumbnail area.
+         Use max specificity + !important to beat all breakpoint overrides. */
+      .camp-sluk    .camp-visual,
+      .camp-afh     .camp-visual,
+      .camp-nomi    .camp-visual,
+      .camp-dele    .camp-visual {
+        height:     180px !important;
+        max-height: 180px !important;
+        min-height: 180px !important;
         aspect-ratio: unset !important;
-        max-height: 230px !important;
       }
 
-      /* Det Okay mobile horizontal scroll — Safari-safe:
-         No position:absolute, no aspect-ratio, no height:100%.
-         Force row direction with !important to prevent any override. */
-      .detokay-mobile-scroll {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        gap: 10px !important;
-        padding: 12px 16px !important;
-        background: #1a1008;
+      /* ── Det Okay: hide desktop carousel, show single static thumb ── */
+      .camp-visual-desktop  { display: none !important; }
+      .detokay-mobile-thumb {
+        display: block !important;
+        height: 180px !important;
+        overflow: hidden !important;
         border-radius: 4px 4px 0 0;
-        width: 100%;
-        box-sizing: border-box;
+        text-decoration: none;
       }
-      .detokay-mobile-scroll img {
-        flex: 0 0 75vw !important;
-        width: 75vw !important;
-        max-width: 75vw !important;
-        height: 260px !important;
-        max-height: 260px !important;
-        min-height: unset !important;
-        border-radius: 6px;
-        scroll-snap-align: start;
+      .detokay-mobile-thumb img {
+        width: 100% !important;
+        height: 180px !important;
         object-fit: cover !important;
         display: block !important;
+        border-radius: 0 !important;
       }
-      /* Buttons & dots always visible on touch (no hover) */
-      .carousel-btn { opacity: 1 !important; width: 44px; height: 44px; font-size: 18px; }
-      .carousel-dots { opacity: 1 !important; }
     }
   </style>
 </head>
@@ -1114,20 +1096,10 @@
               <div class="camp-platform-badge"><span class="platform-dot"></span>Campaign</div>
             </a>
 
-            <!-- Mobile scroll fallback (shown only on mobile, no JS, no position:absolute, no aspect-ratio) -->
-            <div class="detokay-mobile-scroll">
-              <img src="Det Okay new/first.PNG"                                          alt="Det Okay" width="300" height="400" loading="lazy" />
-              <img src="Det Okay new/third.PNG"                                          alt="Det Okay" width="300" height="400" loading="lazy" />
-              <img src="Det Okay new/Anna langt citat.PNG"                               alt="Det Okay" width="300" height="400" loading="lazy" />
-              <img src="Det Okay new/C4C5BCF3-4042-4ED2-B091-5DCDBA8D50C6.JPG"         alt="Det Okay" width="300" height="400" loading="lazy" />
-              <img src="Det Okay new/Skærmbillede 2026-03-27 kl. 11.22.10.png"          alt="Det Okay" width="300" height="400" loading="lazy" />
-              <img src="thumbs/camp-2b.jpg"                                              alt="Det Okay podcast" width="300" height="300" loading="lazy" />
-              <img src="Behind the scenes/IMG_1494.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
-              <img src="Behind the scenes/IMG_1512.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
-              <img src="Behind the scenes/IMG_1537.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
-              <img src="Behind the scenes/IMG_1954.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
-              <img src="Behind the scenes/IMG_1961.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
-            </div>
+            <!-- Mobile: single static thumbnail (no carousel, no scroll) -->
+            <a class="detokay-mobile-thumb" href="https://headspace.dk/det-okay/" target="_blank" rel="noopener">
+              <img src="Det Okay new/first.PNG" alt="Det Okay" width="600" height="180" />
+            </a>
             <div class="camp-info">
               <div class="camp-title">Det Okay Campaign</div>
               <p class="camp-desc">"Det' Okay" shines a light on vulnerability in all its forms. The campaign brings mental health struggles out of the shadows and in front of the camera, where photographer Petra Kleis beautifully captures the strengths and vulnerabilities of our headspace ambassadors through intimate portraits. The campaign also extended into listeners' ears through the "Det' Okay" podcast, which reached #1 on Apple Podcasts and Spotify and generated significant press coverage. I developed the original concept, led the campaign as project manager, shaped the visual identity, and handled the PR strategy.</p>
