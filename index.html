@@ -915,6 +915,12 @@
     /* ── Mobile-only fixes ───────────────────────── */
     .nav-name-emoji { display: none; }
 
+    /* Mobile scroll fallback — hidden on desktop */
+    .detokay-mobile-scroll { display: none; }
+
+    /* Desktop carousel — always visible on desktop */
+    .camp-visual-desktop { display: block; }
+
     @media (max-width: 768px) {
       /* Swap name → goat emoji in nav */
       .nav-name-text  { display: none; }
@@ -925,17 +931,38 @@
       .nav-links { gap: 18px; }
       .nav-links a { font-size: 11px; }
 
-      /* Carousel fix: iOS Safari doesn't resolve height:100% chains from aspect-ratio.
-         Use an explicit pixel height so the absolute-positioned carousel fills correctly. */
-      .camp-detokay .camp-visual {
-        height: 280px;
-        aspect-ratio: unset; /* override both 9/16 (≤900) and 4/3 (≤560) breakpoints */
+      /* Hide desktop carousel on mobile */
+      .camp-visual-desktop { display: none !important; }
+
+      /* Safari-safe mobile horizontal scroll:
+         - No position:absolute, no aspect-ratio, no height:100%
+         - Every image has explicit width/height attrs in HTML
+         - Native overflow scroll with snap */
+      .detokay-mobile-scroll {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        -webkit-scroll-snap-type: mandatory;
+        gap: 10px;
+        padding: 12px 16px;
+        background: #1a1008;
+        border-radius: 4px 4px 0 0;
       }
-      /* Ensure carousel children can resolve height:100% */
-      .carousel-wrap { position: absolute; inset: 0; }
-      .carousel-track { height: 100%; }
-      .carousel-slide { height: 100%; }
-      .carousel-slide img { width: 100%; height: 100%; object-fit: contain; }
+      .detokay-mobile-scroll img {
+        -webkit-flex: 0 0 80vw;
+        flex: 0 0 80vw;
+        width: 80vw;
+        height: auto;
+        min-height: 200px;
+        border-radius: 6px;
+        scroll-snap-align: start;
+        -webkit-scroll-snap-align: start;
+        object-fit: cover;
+        display: block;
+      }
       /* Buttons & dots always visible on touch (no hover) */
       .carousel-btn { opacity: 1 !important; width: 44px; height: 44px; font-size: 18px; }
       .carousel-dots { opacity: 1 !important; }
@@ -1042,7 +1069,8 @@
         <!-- 2: Det okay Campaign — carousel -->
         <div class="camp-detokay reveal reveal-delay-1">
           <div class="camp-brick">
-            <a class="camp-visual" href="https://headspace.dk/det-okay/" target="_blank" rel="noopener">
+            <!-- Desktop carousel (hidden on mobile) -->
+            <a class="camp-visual camp-visual-desktop" href="https://headspace.dk/det-okay/" target="_blank" rel="noopener">
               <div class="carousel-wrap">
                 <div class="carousel-track" id="detokay-track">
                   <div class="carousel-slide"><img src="Det Okay new/first.PNG" alt="Det Okay" /></div>
@@ -1076,6 +1104,21 @@
               </div>
               <div class="camp-platform-badge"><span class="platform-dot"></span>Campaign</div>
             </a>
+
+            <!-- Mobile scroll fallback (shown only on mobile, no JS, no position:absolute, no aspect-ratio) -->
+            <div class="detokay-mobile-scroll">
+              <img src="Det Okay new/first.PNG"                                          alt="Det Okay" width="300" height="400" loading="lazy" />
+              <img src="Det Okay new/third.PNG"                                          alt="Det Okay" width="300" height="400" loading="lazy" />
+              <img src="Det Okay new/Anna langt citat.PNG"                               alt="Det Okay" width="300" height="400" loading="lazy" />
+              <img src="Det Okay new/C4C5BCF3-4042-4ED2-B091-5DCDBA8D50C6.JPG"         alt="Det Okay" width="300" height="400" loading="lazy" />
+              <img src="Det Okay new/Skærmbillede 2026-03-27 kl. 11.22.10.png"          alt="Det Okay" width="300" height="400" loading="lazy" />
+              <img src="thumbs/camp-2b.jpg"                                              alt="Det Okay podcast" width="300" height="300" loading="lazy" />
+              <img src="Behind the scenes/IMG_1494.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
+              <img src="Behind the scenes/IMG_1512.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
+              <img src="Behind the scenes/IMG_1537.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
+              <img src="Behind the scenes/IMG_1954.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
+              <img src="Behind the scenes/IMG_1961.jpg"                                  alt="Det Okay behind the scenes" width="300" height="400" loading="lazy" />
+            </div>
             <div class="camp-info">
               <div class="camp-title">Det Okay Campaign</div>
               <p class="camp-desc">"Det' Okay" shines a light on vulnerability in all its forms. The campaign brings mental health struggles out of the shadows and in front of the camera, where photographer Petra Kleis beautifully captures the strengths and vulnerabilities of our headspace ambassadors through intimate portraits. The campaign also extended into listeners' ears through the "Det' Okay" podcast, which reached #1 on Apple Podcasts and Spotify and generated significant press coverage. I developed the original concept, led the campaign as project manager, shaped the visual identity, and handled the PR strategy.</p>
