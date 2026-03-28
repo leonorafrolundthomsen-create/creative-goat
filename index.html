@@ -316,12 +316,26 @@
     .work-panel { display: none; }
     .work-panel.active { display: block; }
 
-    #panel-graphic .content-card { aspect-ratio: 1/1; }
+    #panel-graphic .work-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    #panel-graphic .content-card {
+      aspect-ratio: 1/1;
+      overflow: visible;
+    }
     #panel-graphic .content-card-bg {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
       background-color: var(--linen);
+      border-radius: 4px;
+    }
+    #panel-graphic .content-card:hover .content-card-bg {
+      transform: none;
+    }
+    #panel-graphic .content-card::after {
+      border-radius: 4px;
     }
 
     .work-grid {
@@ -781,6 +795,7 @@
       .hero-deco-2 { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 50px; }
       .work-grid { grid-template-columns: repeat(2, 1fr); }
+      #panel-graphic .work-grid { grid-template-columns: repeat(2, 1fr); }
       .campaign-grid { grid-template-columns: 1fr 1fr; }
       .camp-sluk    { grid-column: 1; grid-row: 1; }
       .camp-detokay { grid-column: 2; grid-row: 1; }
