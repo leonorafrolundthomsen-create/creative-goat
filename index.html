@@ -370,6 +370,42 @@
       font-style: italic;
       color: var(--muted);
     }
+    .more-video-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 12px 0 40px;
+    }
+    .more-video-card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--linen);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(62,42,24,0.10);
+    }
+    .more-video-card video {
+      width: 100%;
+      display: block;
+      background: var(--deep);
+    }
+    .more-video-meta {
+      padding: 18px 22px 22px;
+    }
+    .more-video-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tan);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .more-video-title {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--deep);
+      line-height: 1;
+    }
 
     #panel-graphic .work-grid {
       grid-template-columns: repeat(3, 1fr);
@@ -1303,7 +1339,20 @@
       </div>
 
       <div id="more-content" class="gate-content">
-        <p class="more-placeholder">Content coming soon.</p>
+        <div class="more-video-wrap">
+          <div class="more-video-card">
+            <video
+              src="dunkelflaute.mp4"
+              controls
+              playsinline
+              preload="metadata"
+            ></video>
+            <div class="more-video-meta">
+              <span class="more-video-label">Campaign film</span>
+              <div class="more-video-title">Dunkelflaute</div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
