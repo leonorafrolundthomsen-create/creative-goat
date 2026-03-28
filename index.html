@@ -101,10 +101,10 @@
 
     /* ── Hero ────────────────────────────────────── */
     #hero {
-      min-height: 100vh;
+      min-height: 50vh;
       display: flex; flex-direction: column;
       justify-content: center; align-items: flex-start;
-      padding: 120px 60px 80px;
+      padding: 120px 60px 20px;
       position: relative;
       overflow: hidden;
     }
@@ -209,6 +209,7 @@
     /* ── About ───────────────────────────────────── */
     #about {
       background: var(--linen);
+      padding-top: 40px;
     }
     .about-grid {
       display: grid;
@@ -775,7 +776,7 @@
       nav { padding: 24px 30px; }
       nav.scrolled { padding: 16px 30px; }
       section { padding: 80px 30px; }
-      #hero { padding: 100px 30px 70px; }
+      #hero { padding: 100px 30px 10px; }
       .hero-scroll { left: 30px; }
       .hero-deco-2 { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 50px; }
@@ -909,6 +910,11 @@
                   <div class="carousel-slide"><img src="Det Okay new/C4C5BCF3-4042-4ED2-B091-5DCDBA8D50C6.JPG" alt="Det Okay" /></div>
                   <div class="carousel-slide"><img src="Det Okay new/Skærmbillede 2026-03-27 kl. 11.22.10.png" alt="Det Okay" /></div>
                   <div class="carousel-slide"><img src="thumbs/camp-2b.jpg" alt="Det Okay podcast" /></div>
+                  <div class="carousel-slide"><img src="Behind the scenes/IMG_1494.jpg" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Behind the scenes/IMG_1512.jpg" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Behind the scenes/IMG_1537.jpg" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Behind the scenes/IMG_1954.jpg" alt="Det Okay" /></div>
+                  <div class="carousel-slide"><img src="Behind the scenes/IMG_1961.jpg" alt="Det Okay" /></div>
                 </div>
               </div>
               <span class="camp-watch-badge">View ↗</span>
@@ -921,6 +927,11 @@
                 <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',3)"></button>
                 <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',4)"></button>
                 <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',5)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',6)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',7)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',8)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',9)"></button>
+                <button class="carousel-dot" onclick="event.preventDefault(); carouselGo('detokay',10)"></button>
               </div>
               <div class="camp-platform-badge"><span class="platform-dot"></span>Campaign</div>
             </a>
@@ -1382,7 +1393,7 @@
       if (!state) return;
       carouselGo(id, (state.index + dir + state.total) % state.total);
     }
-    carouselInit('detokay', 6);
+    carouselInit('detokay', 11);
 
     // ── Work tabs ────────────────────────────────
     function switchTab(btn, panelId) {
