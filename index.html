@@ -925,10 +925,19 @@
       .nav-links { gap: 18px; }
       .nav-links a { font-size: 11px; }
 
-      /* Carousel: ensure it has visible height and buttons always show */
-      .camp-detokay .camp-visual { min-height: 240px; }
-      .carousel-btn { opacity: 1 !important; width: 40px; height: 40px; font-size: 18px; }
-      /* Show carousel dots without hover */
+      /* Carousel fix: iOS Safari doesn't resolve height:100% chains from aspect-ratio.
+         Use an explicit pixel height so the absolute-positioned carousel fills correctly. */
+      .camp-detokay .camp-visual {
+        height: 280px;
+        aspect-ratio: unset; /* override both 9/16 (≤900) and 4/3 (≤560) breakpoints */
+      }
+      /* Ensure carousel children can resolve height:100% */
+      .carousel-wrap { position: absolute; inset: 0; }
+      .carousel-track { height: 100%; }
+      .carousel-slide { height: 100%; }
+      .carousel-slide img { width: 100%; height: 100%; object-fit: contain; }
+      /* Buttons & dots always visible on touch (no hover) */
+      .carousel-btn { opacity: 1 !important; width: 44px; height: 44px; font-size: 18px; }
       .carousel-dots { opacity: 1 !important; }
     }
   </style>
