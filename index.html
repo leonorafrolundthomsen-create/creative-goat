@@ -6,7 +6,7 @@
   <title>Leonora Thomsen — Content & Growth</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Changa:wght@700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & Base ────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -111,9 +111,10 @@
       animation: fadeUp 1s ease 0.4s forwards;
     }
     .hero-name {
-      font-family: 'Caveat', cursive;
+      font-family: 'Changa', sans-serif;
       font-size: clamp(72px, 11vw, 160px);
-      font-weight: 600;
+      font-weight: 800;
+      text-transform: uppercase;
       line-height: 0.95;
       color: var(--deep);
       letter-spacing: -0.01em;
@@ -181,8 +182,16 @@
       position: relative;
       overflow: hidden;
     }
-    .hero-intro {
+    .hero-band {
+      background: #ece5dc;
+      margin-top: -120px;
+      margin-left: -60px;
+      margin-right: -60px;
       margin-bottom: 80px;
+      padding: 120px 60px 60px;
+    }
+    .hero-intro {
+      margin-bottom: 0;
     }
     .about-grid {
       display: grid;
@@ -887,6 +896,7 @@
       nav.scrolled { padding: 16px 30px; }
       section { padding: 80px 30px; }
       #about { padding: 80px 30px 80px; }
+      .hero-band { margin-top: -80px; margin-left: -30px; margin-right: -30px; padding: 80px 30px 50px; }
       .hero-deco-2 { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 50px; }
       .work-grid { grid-template-columns: repeat(2, 1fr); }
@@ -981,10 +991,12 @@
     <div class="hero-deco"></div>
     <div class="hero-deco-2">LT</div>
 
-    <div class="hero-intro">
-      <p class="hero-eyebrow">Brandbuilding, Community &amp; Content</p>
-      <h1 class="hero-name">Leonora<br>Thomsen</h1>
-      <p class="hero-title">Content &amp; Growth / Social Media Specialist</p>
+    <div class="hero-band">
+      <div class="hero-intro">
+        <p class="hero-eyebrow">Brandbuilding, Community &amp; Content</p>
+        <h1 class="hero-name">Leonora<br>Thomsen</h1>
+        <p class="hero-title">Content &amp; Growth / Social Media Specialist</p>
+      </div>
     </div>
 
     <div class="about-grid">
