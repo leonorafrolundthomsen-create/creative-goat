@@ -203,17 +203,6 @@
     .about-image-wrap {
       position: relative;
     }
-    .about-image-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -16px -16px 16px 16px;
-      border: 1px solid var(--sand);
-      border-radius: 2px;
-      transition: inset 0.4s ease;
-    }
-    .about-image-wrap:hover::before {
-      inset: -8px -8px 8px 8px;
-    }
     .about-img {
       width: 100%;
       aspect-ratio: 3/4;
@@ -222,6 +211,11 @@
       display: block;
       filter: sepia(8%) saturate(90%);
       transition: filter 0.4s ease;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 80%);
+      mask-image: radial-gradient(ellipse at center, black 45%, transparent 80%);
     }
     .about-img:hover { filter: sepia(0%) saturate(100%); }
 
