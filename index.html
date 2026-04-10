@@ -275,35 +275,36 @@
     /* ── Work ────────────────────────────────────── */
     #work { background: var(--cream); }
 
-    .work-tabs {
-      display: flex; gap: 0;
+    .work-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 600px;
       margin-bottom: 60px;
-      border-bottom: 1px solid var(--sand);
     }
-    .work-tab {
+    .work-nav-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 24px;
+      border: 1px solid #c4b5a0;
+      border-radius: 12px;
+      cursor: pointer;
+      background: transparent;
+      font-family: inherit;
       font-size: 12px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
-      padding: 14px 28px;
-      cursor: pointer;
-      border: none; background: none;
-      position: relative;
-      transition: color 0.3s;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     }
-    .work-tab::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 2px;
+    .work-nav-box:hover { background: rgba(139, 115, 85, 0.05); }
+    .work-nav-box .nav-icon { font-size: 22px; line-height: 1; }
+    .work-nav-box.active {
       background: var(--brown);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
+      color: var(--cream);
+      border-color: var(--brown);
     }
-    .work-tab.active { color: var(--brown); }
-    .work-tab.active::after { transform: scaleX(1); }
-    .work-tab:hover { color: var(--brown); }
 
     .work-panel { display: none; }
     .work-panel.active { display: block; }
@@ -928,7 +929,7 @@
       .campaign-grid { grid-template-columns: 1fr; }
       .camp-sluk, .camp-detokay, .camp-afh,
       .camp-nomi, .camp-dele { grid-column: 1; grid-row: auto; }
-      .work-tabs { overflow-x: auto; }
+      .work-nav { max-width: 100%; }
     }
 
     /* ── Mobile-only fixes ───────────────────────── */
@@ -1050,11 +1051,19 @@
     <h2 class="section-heading reveal" style="margin-bottom:0;">Some of my work</h2>
     <p class="reveal" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:var(--brown); margin-top:6px; margin-bottom:0; font-weight:500;">Some great, some 🐐</p>
 
-    <div class="work-tabs reveal">
-      <button class="work-tab active" onclick="switchTab(this, 'campaigns')">Campaigns</button>
-      <button class="work-tab" onclick="switchTab(this, 'social')">Social-first content</button>
-      <button class="work-tab" onclick="switchTab(this, 'graphic')">Graphic content</button>
-      <button class="work-tab" onclick="switchTab(this, 'more')">More</button>
+    <div class="work-nav reveal">
+      <button class="work-nav-box active" onclick="switchTab(this, 'campaigns')">
+        <span class="nav-icon">🎬</span><span>Campaigns</span>
+      </button>
+      <button class="work-nav-box" onclick="switchTab(this, 'social')">
+        <span class="nav-icon">📱</span><span>Social-first</span>
+      </button>
+      <button class="work-nav-box" onclick="switchTab(this, 'graphic')">
+        <span class="nav-icon">🎨</span><span>Graphic</span>
+      </button>
+      <button class="work-nav-box" onclick="switchTab(this, 'more')">
+        <span class="nav-icon">🔒</span><span>More</span>
+      </button>
     </div>
 
     <!-- Campaigns -->
@@ -1626,7 +1635,7 @@
 
     // ── Work tabs ────────────────────────────────
     function switchTab(btn, panelId) {
-      document.querySelectorAll('.work-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.work-nav-box').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.work-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('panel-' + panelId).classList.add('active');
