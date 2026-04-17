@@ -205,10 +205,10 @@
     }
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1.8fr;
+      grid-template-columns: 1fr;
       gap: 80px;
-      align-items: center;
-      max-width: 1200px;
+      align-items: start;
+      max-width: 950px;
     }
     #about .section-heading {
       font-family: 'Changa', sans-serif;
@@ -240,9 +240,9 @@
       font-size: 15px;
       line-height: 1.9;
       color: var(--text);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
-    .about-text + .about-text { margin-bottom: 40px; }
+    .about-text + .about-text { margin-bottom: 12px; }
 
     .skills-label {
       font-size: 10px;
@@ -937,6 +937,8 @@
       .hero-band { margin-top: -80px; margin-left: -30px; margin-right: -30px; padding: 80px 30px 50px; }
       .hero-deco-2 { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 50px; }
+      .about-text { margin-bottom: 20px; }
+      .about-text + .about-text { margin-bottom: 40px; }
       .work-grid { grid-template-columns: repeat(2, 1fr); }
       #panel-graphic .work-grid { grid-template-columns: repeat(2, 1fr); }
       .ig-embed-wrap iframe { height: 460px; }
