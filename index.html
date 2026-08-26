@@ -91,6 +91,11 @@
       opacity: 0;
       animation: fadeDown 0.8s ease 0.2s forwards;
     }
+    .nav-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
     .nav-links {
       display: flex; gap: 40px;
       list-style: none;
@@ -212,9 +217,10 @@
       padding: 120px 60px 100px;
       position: relative;
       overflow: hidden;
+      background: #ffffff;
     }
     .hero-band {
-      background: #ece5dc;
+      background: #ecdfd3;
       margin-top: -120px;
       margin-left: -60px;
       margin-right: -60px;
@@ -223,6 +229,22 @@
     }
     .hero-intro {
       margin-bottom: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 20px;
+    }
+    .hero-intro .hero-title,
+    .hero-intro .hero-cta {
+      width: 100%;
+    }
+    .hero-hoof {
+      height: clamp(120px, 18vw, 260px);
+      width: auto;
+      object-fit: contain;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+      align-self: center;
     }
     .about-grid {
       display: grid;
@@ -959,6 +981,7 @@
       #about { padding: 80px 30px 80px; }
       .hero-band { margin-top: -80px; margin-left: -30px; margin-right: -30px; padding: 80px 30px 50px; }
       .hero-deco-2 { display: none; }
+      .hero-hoof { height: clamp(60px, 12vw, 100px); }
       .about-grid { grid-template-columns: 1fr; gap: 30px; }
       .about-photo { max-width: 200px; margin: 0 auto; order: -1; }
       .about-text { margin-bottom: 20px; }
@@ -1041,7 +1064,7 @@
 
   <!-- Navigation -->
   <nav id="navbar">
-    <a href="#about" class="nav-name">Leonora Thomsen</a>
+    <a href="#about" class="nav-name"><img src="Logoer/CG-logo2.PNG" alt="Creative Goat" class="nav-logo" /></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
@@ -1057,6 +1080,7 @@
     <div class="hero-band">
       <div class="hero-intro">
         <h1 class="hero-name">Leonora<br>Thomsen</h1>
+        <img src="Logoer/CG-fodspor4.PNG" alt="" class="hero-hoof" aria-hidden="true" />
         <p class="hero-title">Brandbuilding, Community &amp; Content</p>
         <a href="#work" class="hero-cta">Et indblik i mit hoved</a>
       </div>
