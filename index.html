@@ -25,8 +25,8 @@
       --cream:   #FAF7F2;
       --linen:   #F2EAE0;
       --sand:    #E4D5C3;
-      --tan:     #C9A98A;
-      --warm:    #A07850;
+      --tan:     #6b8f71;
+      --warm:    #6b8f71;
       --brown:   #6B4C32;
       --deep:    #3E2A18;
       --text:    #4A3728;
@@ -88,6 +88,12 @@
       color: var(--brown);
       letter-spacing: 0.02em;
       text-decoration: none;
+      opacity: 0;
+      animation: fadeDown 0.8s ease 0.2s forwards;
+    }
+    .nav-logo {
+      height: 32px;
+      width: auto;
       opacity: 0;
       animation: fadeDown 0.8s ease 0.2s forwards;
     }
@@ -165,6 +171,25 @@
       opacity: 0;
       animation: fadeIn 1.5s ease 1s forwards;
     }
+
+    /* ── Hero CTA button ──────────────────────────── */
+    .hero-cta {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 14px 34px;
+      background: #2d6a6a;
+      color: #FAF7F2;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+    .hero-cta:hover { background: #245757; transform: translateY(-1px); }
 
     /* ── Sections shared ─────────────────────────── */
     section { padding: 100px 60px; }
@@ -300,9 +325,9 @@
     .work-nav-box:hover { background: rgba(139, 115, 85, 0.05); }
     .work-nav-box .nav-icon { font-size: 22px; line-height: 1; }
     .work-nav-box.active {
-      background: var(--brown);
+      background: #2d6a6a;
       color: var(--cream);
-      border-color: var(--brown);
+      border-color: #2d6a6a;
     }
 
     .work-panel { display: none; }
@@ -358,7 +383,7 @@
     .gate-input::placeholder { letter-spacing: 0.1em; color: var(--muted); }
     .gate-btn {
       padding: 13px 40px;
-      background: var(--deep);
+      background: #2d6a6a;
       color: var(--cream);
       border: none;
       border-radius: 40px;
@@ -369,7 +394,7 @@
       cursor: pointer;
       transition: background 0.3s, transform 0.2s;
     }
-    .gate-btn:hover { background: var(--brown); transform: translateY(-1px); }
+    .gate-btn:hover { background: #245757; transform: translateY(-1px); }
     .gate-error {
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -584,8 +609,8 @@
 
     /* gradient-only background cards */
     .bg-grad-1 { background: linear-gradient(160deg, #8B6E52 0%, #3E2A18 100%); }
-    .bg-grad-2 { background: linear-gradient(160deg, #C9A98A 0%, #5C3D2E 100%); }
-    .bg-grad-3 { background: linear-gradient(160deg, #A07850 0%, #3E2A18 100%); }
+    .bg-grad-2 { background: linear-gradient(160deg, #6b8f71 0%, #5C3D2E 100%); }
+    .bg-grad-3 { background: linear-gradient(160deg, #6b8f71 0%, #3E2A18 100%); }
 
     /* ── Campaign bricks ─────────────────────────── */
     .campaign-grid {
@@ -707,7 +732,7 @@
       color: var(--warm);
       transition: background 0.3s, color 0.3s;
     }
-    .camp-tag:hover { background: var(--warm); color: var(--cream); }
+    .camp-tag:hover { background: #2d6a6a; color: var(--cream); }
 
     /* ── Carousel ────────────────────────────────── */
     .carousel-wrap {
@@ -869,14 +894,16 @@
     footer {
       background: #8b7355;
       border-top: none;
-      padding: 28px 60px;
-      display: flex; align-items: center; justify-content: space-between;
+      padding: 36px 60px 28px;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
     }
-    .footer-name {
-      font-family: 'Caveat', cursive;
-      font-size: 18px;
-      color: var(--muted);
+    .footer-logo {
+      height: 44px;
+      width: auto;
+      opacity: 0.85;
+      transition: opacity 0.3s;
     }
+    .footer-logo:hover { opacity: 1; }
     .footer-copy {
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -1018,8 +1045,7 @@
   <!-- Navigation -->
   <nav id="navbar">
     <a href="#about" class="nav-name">
-      <span class="nav-name-text">Leonora Thomsen</span>
-      <span class="nav-name-emoji" aria-hidden="true">🐐</span>
+      <img src="logoer/CG-fodspor.PNG" alt="Creative Goat" class="nav-logo" />
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -1037,6 +1063,7 @@
       <div class="hero-intro">
         <h1 class="hero-name">Leonora<br>Thomsen</h1>
         <p class="hero-title">Brandbuilding, Community &amp; Content</p>
+        <a href="#work" class="hero-cta">Et indblik i mit hoved</a>
       </div>
     </div>
 
@@ -1632,7 +1659,7 @@
   <section id="contact">
     <div class="contact-body">
       <div>
-        <img src="headshot.png" alt="Leonora Thomsen" class="reveal" style="width:88px; height:88px; border-radius:50%; object-fit:cover; object-position:center top; display:block; margin-bottom:20px;" />
+        <img src="Leonora%20profil%20billede.png" alt="Leonora Thomsen" class="reveal" style="width:88px; height:88px; border-radius:50%; object-fit:cover; object-position:center top; display:block; margin-bottom:20px;" />
         <span class="section-label reveal">Get in touch</span>
         <h2 class="section-heading reveal">Let's<br>talk</h2>
         <p class="contact-text reveal">
@@ -1661,7 +1688,7 @@
 
   <!-- Footer -->
   <footer>
-    <span class="footer-name">Leonora Thomsen</span>
+    <img src="logoer/CG-logo2.PNG" alt="Creative Goat" class="footer-logo" />
     <span class="footer-copy">© 2026 — Brandbuilding, Community &amp; Content 🐐</span>
   </footer>
 
