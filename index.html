@@ -172,6 +172,62 @@
       animation: fadeIn 1.5s ease 1s forwards;
     }
 
+    /* ── Decorative brand logos ────────────────────── */
+    .deco-logo {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    /* Hero: wordmark floating right side */
+    .deco-hero-wordmark {
+      right: 40px; top: 50%;
+      transform: translateY(-50%) rotate(-8deg);
+      width: 280px;
+      opacity: 0.12;
+    }
+    /* Hero: hoof trail bottom-right */
+    .deco-hero-trail {
+      right: -20px; bottom: 30px;
+      width: 180px;
+      opacity: 0.1;
+      transform: rotate(15deg);
+    }
+    /* Section divider between About and Work */
+    .deco-divider {
+      display: block;
+      margin: 0 auto;
+      width: 60px;
+      opacity: 0.2;
+      padding: 20px 0;
+    }
+    /* Floating accent in work section */
+    .deco-work-accent {
+      right: 30px; top: 80px;
+      width: 70px;
+      opacity: 0.1;
+      transform: rotate(12deg);
+    }
+    /* Contact section: hoof prints */
+    .deco-contact {
+      position: absolute;
+      right: 60px; bottom: 40px;
+      width: 100px;
+      opacity: 0.15;
+      pointer-events: none;
+      transform: rotate(-10deg);
+    }
+    @media (max-width: 900px) {
+      .deco-hero-wordmark { width: 160px; right: 10px; opacity: 0.08; }
+      .deco-hero-trail { display: none; }
+      .deco-work-accent { display: none; }
+      .deco-contact { width: 70px; right: 20px; bottom: 20px; opacity: 0.1; }
+    }
+    @media (max-width: 560px) {
+      .deco-hero-wordmark { display: none; }
+      .deco-contact { display: none; }
+    }
+
     /* ── Hero CTA button ──────────────────────────── */
     .hero-cta {
       display: inline-block;
@@ -1066,6 +1122,8 @@
   <section id="about">
     <div class="hero-deco"></div>
     <div class="hero-deco-2">LT</div>
+    <img src="logoer/CG-logo4.PNG" alt="" class="deco-logo deco-hero-wordmark" aria-hidden="true" />
+    <img src="logoer/CG-fodspor4.PNG" alt="" class="deco-logo deco-hero-trail" aria-hidden="true" />
 
     <div class="hero-band">
       <div class="hero-intro">
@@ -1106,8 +1164,11 @@
     </div>
   </section>
 
+  <img src="logoer/CG-logo2.PNG" alt="" class="deco-divider reveal" aria-hidden="true" />
+
   <!-- ── Work ── -->
-  <section id="work">
+  <section id="work" style="position:relative;">
+    <img src="logoer/CG-fodspor.PNG" alt="" class="deco-logo deco-work-accent" aria-hidden="true" />
     <span class="section-label reveal">Portfolio</span>
     <h2 class="section-heading reveal" style="margin-bottom:0;">Some of my work</h2>
     <p class="reveal" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:var(--brown); margin-top:6px; margin-bottom:0; font-weight:500;">A selection of my work. Some great, some 🐐</p>
@@ -1665,7 +1726,8 @@
   </section>
 
   <!-- ── Contact ── -->
-  <section id="contact">
+  <section id="contact" style="position:relative; overflow:hidden;">
+    <img src="logoer/CG-fodspor3.PNG" alt="" class="deco-contact" aria-hidden="true" />
     <div class="contact-body">
       <div>
         <img src="Leonora%20profil%20billede.png" alt="Leonora Thomsen" class="reveal" style="width:88px; height:88px; border-radius:50%; object-fit:cover; object-position:center top; display:block; margin-bottom:20px;" />
