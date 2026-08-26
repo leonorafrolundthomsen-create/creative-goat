@@ -92,9 +92,11 @@
       animation: fadeDown 0.8s ease 0.2s forwards;
     }
     .nav-logo {
-      height: 40px;
+      height: 90px;
       width: auto;
       display: block;
+      mix-blend-mode: multiply;
+      background: transparent;
     }
     .nav-links {
       display: flex; gap: 40px;
@@ -234,9 +236,11 @@
       align-items: flex-end;
       gap: 20px;
     }
-    .hero-intro .hero-title,
-    .hero-intro .hero-cta {
+    .hero-intro .hero-title {
       width: 100%;
+    }
+    .hero-intro .hero-cta {
+      width: fit-content;
     }
     .hero-hoof {
       height: clamp(120px, 18vw, 260px);
