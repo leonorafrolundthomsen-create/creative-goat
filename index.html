@@ -1021,13 +1021,30 @@
     .camp-visual-desktop  { display: block; } /* desktop carousel, always on */
 
     @media (max-width: 768px) {
-      /* ── Nav: swap full name for goat emoji ──── */
-      .nav-name-text  { display: none; }
-      .nav-name-emoji { display: inline; font-size: 26px; line-height: 1; }
-      nav             { padding: 14px 20px; }
-      nav.scrolled    { padding: 10px 20px; }
-      .nav-links      { gap: 18px; }
-      .nav-links a    { font-size: 11px; }
+      /* ── Nav: smaller logo, compact spacing ──── */
+      .nav-logo        { height: 45px; }
+      nav              { padding: 14px 20px; }
+      nav.scrolled     { padding: 10px 20px; }
+      .nav-links       { gap: 18px; }
+      .nav-links a     { font-size: 11px; }
+
+      /* ── Hero: hide hoof trail, fix button ──── */
+      .hero-hoof       { display: none; }
+      .hero-cta        { width: fit-content; }
+      .hero-intro      { display: block; }
+      .hero-name       { font-size: clamp(52px, 14vw, 80px); }
+      .hero-band       { padding-top: 70px; padding-bottom: 40px; }
+
+      /* ── About: stack photo on top ──── */
+      .about-grid      { grid-template-columns: 1fr; gap: 30px; }
+      .about-photo     { max-width: 200px; margin: 0 auto; order: -1; }
+
+      /* ── Campaign cards: prevent overflow ──── */
+      #work            { overflow-x: hidden; }
+      .camp-brick      { max-width: 100%; overflow: hidden; }
+      .camp-body       { max-width: 100%; overflow: hidden; }
+      .camp-desc       { word-wrap: break-word; overflow-wrap: break-word; }
+      .camp-tags       { flex-wrap: wrap; }
 
       /* ── Campaign cards: compact 180px thumbnails ──
          .camp-visual is position:relative; its child .camp-visual-bg is
